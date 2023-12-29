@@ -1,159 +1,174 @@
 package com.spring.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "Vaccine")
 public class Vaccine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "VaccineId")
-    private String vaccineId;
-    @Basic
+    private Integer vaccineId;
+    
+    @NotNull
     @Column(name = "Contraindication")
     private String contraindication;
-    @Basic
+    
+    @NotNull
     @Column(name = "Indication")
     private String indication;
-    @Basic
+    
+    @NotNull
     @Column(name = "NumberOfInjection")
-    private int numberOfInjection;
-    @Basic
+    private Integer numberOfInjection;
+    
+    @NotNull
     @Column(name = "Origin")
     private String origin;
-    @Basic
+    
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "TimeBeginNextInjection")
     private Date timeBeginNextInjection;
-    @Basic
+    
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "TimeEndNextInjection")
     private Date timeEndNextInjection;
-    @Basic
+    
+    @NotNull
     @Column(name = "Usage")
     private String usage;
-    @Basic
+    
+    @NotNull
     @Column(name = "VaccineName")
     private String vaccineName;
-    @Basic
-    @Column(name = "VaccineType_Id")
-    private String vaccineTypeId;
+    
+    @OneToMany(mappedBy = "vaccine", cascade = CascadeType.ALL)
+    private List<Result> results = new ArrayList<Result>();
+    
+    @OneToMany(mappedBy = "vaccine", cascade = CascadeType.ALL )
+    private List<Schedule> schedules = new ArrayList<Schedule>();
+    
+    @OneToMany(mappedBy = "vaccine" , cascade = CascadeType.ALL)
+    private List<VaccineType> vaccineTypes = new ArrayList<VaccineType>();
 
-    public String getVaccineId() {
-        return vaccineId;
-    }
+	public Integer getVaccineId() {
+		return vaccineId;
+	}
 
-    public void setVaccineId(String vaccineId) {
-        this.vaccineId = vaccineId;
-    }
+	public void setVaccineId(Integer vaccineId) {
+		this.vaccineId = vaccineId;
+	}
 
-    public String getContraindication() {
-        return contraindication;
-    }
+	public String getContraindication() {
+		return contraindication;
+	}
 
-    public void setContraindication(String contraindication) {
-        this.contraindication = contraindication;
-    }
+	public void setContraindication(String contraindication) {
+		this.contraindication = contraindication;
+	}
 
-    public String getIndication() {
-        return indication;
-    }
+	public String getIndication() {
+		return indication;
+	}
 
-    public void setIndication(String indication) {
-        this.indication = indication;
-    }
+	public void setIndication(String indication) {
+		this.indication = indication;
+	}
 
-    public int getNumberOfInjection() {
-        return numberOfInjection;
-    }
+	public Integer getNumberOfInjection() {
+		return numberOfInjection;
+	}
 
-    public void setNumberOfInjection(int numberOfInjection) {
-        this.numberOfInjection = numberOfInjection;
-    }
+	public void setNumberOfInjection(Integer numberOfInjection) {
+		this.numberOfInjection = numberOfInjection;
+	}
 
-    public String getOrigin() {
-        return origin;
-    }
+	public String getOrigin() {
+		return origin;
+	}
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
 
-    public Date getTimeBeginNextInjection() {
-        return timeBeginNextInjection;
-    }
+	public Date getTimeBeginNextInjection() {
+		return timeBeginNextInjection;
+	}
 
-    public void setTimeBeginNextInjection(Date timeBeginNextInjection) {
-        this.timeBeginNextInjection = timeBeginNextInjection;
-    }
+	public void setTimeBeginNextInjection(Date timeBeginNextInjection) {
+		this.timeBeginNextInjection = timeBeginNextInjection;
+	}
 
-    public Date getTimeEndNextInjection() {
-        return timeEndNextInjection;
-    }
+	public Date getTimeEndNextInjection() {
+		return timeEndNextInjection;
+	}
 
-    public void setTimeEndNextInjection(Date timeEndNextInjection) {
-        this.timeEndNextInjection = timeEndNextInjection;
-    }
+	public void setTimeEndNextInjection(Date timeEndNextInjection) {
+		this.timeEndNextInjection = timeEndNextInjection;
+	}
 
-    public String getUsage() {
-        return usage;
-    }
+	public String getUsage() {
+		return usage;
+	}
 
-    public void setUsage(String usage) {
-        this.usage = usage;
-    }
+	public void setUsage(String usage) {
+		this.usage = usage;
+	}
 
-    public String getVaccineName() {
-        return vaccineName;
-    }
+	public String getVaccineName() {
+		return vaccineName;
+	}
 
-    public void setVaccineName(String vaccineName) {
-        this.vaccineName = vaccineName;
-    }
+	public void setVaccineName(String vaccineName) {
+		this.vaccineName = vaccineName;
+	}
 
-    public String getVaccineTypeId() {
-        return vaccineTypeId;
-    }
+	public List<Schedule> getSchedules() {
+		return schedules;
+	}
 
-    public void setVaccineTypeId(String vaccineTypeId) {
-        this.vaccineTypeId = vaccineTypeId;
-    }
+	public void setSchedules(List<Schedule> schedules) {
+		this.schedules = schedules;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public List<VaccineType> getVaccineTypes() {
+		return vaccineTypes;
+	}
 
-        Vaccine vaccine = (Vaccine) o;
+	public void setVaccineTypes(List<VaccineType> vaccineTypes) {
+		this.vaccineTypes = vaccineTypes;
+	}
 
-        if (numberOfInjection != vaccine.numberOfInjection) return false;
-        if (vaccineId != null ? !vaccineId.equals(vaccine.vaccineId) : vaccine.vaccineId != null) return false;
-        if (contraindication != null ? !contraindication.equals(vaccine.contraindication) : vaccine.contraindication != null)
-            return false;
-        if (indication != null ? !indication.equals(vaccine.indication) : vaccine.indication != null) return false;
-        if (origin != null ? !origin.equals(vaccine.origin) : vaccine.origin != null) return false;
-        if (timeBeginNextInjection != null ? !timeBeginNextInjection.equals(vaccine.timeBeginNextInjection) : vaccine.timeBeginNextInjection != null)
-            return false;
-        if (timeEndNextInjection != null ? !timeEndNextInjection.equals(vaccine.timeEndNextInjection) : vaccine.timeEndNextInjection != null)
-            return false;
-        if (usage != null ? !usage.equals(vaccine.usage) : vaccine.usage != null) return false;
-        if (vaccineName != null ? !vaccineName.equals(vaccine.vaccineName) : vaccine.vaccineName != null) return false;
-        if (vaccineTypeId != null ? !vaccineTypeId.equals(vaccine.vaccineTypeId) : vaccine.vaccineTypeId != null)
-            return false;
+	protected Vaccine(Integer vaccineId, @NotNull String contraindication, @NotNull String indication,
+			@NotNull Integer numberOfInjection, @NotNull String origin, @NotNull Date timeBeginNextInjection,
+			@NotNull Date timeEndNextInjection, @NotNull String usage, @NotNull String vaccineName,
+			List<Schedule> schedules, List<VaccineType> vaccineTypes) {
+		super();
+		this.vaccineId = vaccineId;
+		this.contraindication = contraindication;
+		this.indication = indication;
+		this.numberOfInjection = numberOfInjection;
+		this.origin = origin;
+		this.timeBeginNextInjection = timeBeginNextInjection;
+		this.timeEndNextInjection = timeEndNextInjection;
+		this.usage = usage;
+		this.vaccineName = vaccineName;
+		this.schedules = schedules;
+		this.vaccineTypes = vaccineTypes;
+	}
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = vaccineId != null ? vaccineId.hashCode() : 0;
-        result = 31 * result + (contraindication != null ? contraindication.hashCode() : 0);
-        result = 31 * result + (indication != null ? indication.hashCode() : 0);
-        result = 31 * result + numberOfInjection;
-        result = 31 * result + (origin != null ? origin.hashCode() : 0);
-        result = 31 * result + (timeBeginNextInjection != null ? timeBeginNextInjection.hashCode() : 0);
-        result = 31 * result + (timeEndNextInjection != null ? timeEndNextInjection.hashCode() : 0);
-        result = 31 * result + (usage != null ? usage.hashCode() : 0);
-        result = 31 * result + (vaccineName != null ? vaccineName.hashCode() : 0);
-        result = 31 * result + (vaccineTypeId != null ? vaccineTypeId.hashCode() : 0);
-        return result;
-    }
+	protected Vaccine() {
+		super();
+	}
+    
+    
 }

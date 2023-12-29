@@ -1,134 +1,132 @@
 package com.spring.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Date;
 
 @Entity
+@Table(name = "Result")
 public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "InjectionResultId")
-    private String injectionResultId;
-    @Basic
-    @Column(name = "CustomerId")
-    private String customerId;
-    @Basic
+    private Integer injectionResultId;
+    
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "InjectionDate")
     private Date injectionDate;
-    @Basic
+    
+    @NotNull
     @Column(name = "InjectionPlace")
     private String injectionPlace;
-    @Basic
+    
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "NextInjectionDate")
     private Date nextInjectionDate;
-    @Basic
+    
+    @NotNull
     @Column(name = "NumberOfInjection")
     private String numberOfInjection;
-    @Basic
+    
+    @NotNull
     @Column(name = "Prevention")
     private String prevention;
-    @Basic
-    @Column(name = "VaccineId")
-    private String vaccineId;
+    
+    @ManyToOne
+    @JoinColumn(name = "CustomerId")
+    private Customer customer;
+    
+    @ManyToOne
+    @JoinColumn(name = "VaccineId")
+    private Vaccine vaccine;
 
-    public String getInjectionResultId() {
-        return injectionResultId;
-    }
+	public Integer getInjectionResultId() {
+		return injectionResultId;
+	}
 
-    public void setInjectionResultId(String injectionResultId) {
-        this.injectionResultId = injectionResultId;
-    }
+	public void setInjectionResultId(Integer injectionResultId) {
+		this.injectionResultId = injectionResultId;
+	}
 
-    public String getCustomerId() {
-        return customerId;
-    }
+	public Date getInjectionDate() {
+		return injectionDate;
+	}
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
+	public void setInjectionDate(Date injectionDate) {
+		this.injectionDate = injectionDate;
+	}
 
-    public Date getInjectionDate() {
-        return injectionDate;
-    }
+	public String getInjectionPlace() {
+		return injectionPlace;
+	}
 
-    public void setInjectionDate(Date injectionDate) {
-        this.injectionDate = injectionDate;
-    }
+	public void setInjectionPlace(String injectionPlace) {
+		this.injectionPlace = injectionPlace;
+	}
 
-    public String getInjectionPlace() {
-        return injectionPlace;
-    }
+	public Date getNextInjectionDate() {
+		return nextInjectionDate;
+	}
 
-    public void setInjectionPlace(String injectionPlace) {
-        this.injectionPlace = injectionPlace;
-    }
+	public void setNextInjectionDate(Date nextInjectionDate) {
+		this.nextInjectionDate = nextInjectionDate;
+	}
 
-    public Date getNextInjectionDate() {
-        return nextInjectionDate;
-    }
+	public String getNumberOfInjection() {
+		return numberOfInjection;
+	}
 
-    public void setNextInjectionDate(Date nextInjectionDate) {
-        this.nextInjectionDate = nextInjectionDate;
-    }
+	public void setNumberOfInjection(String numberOfInjection) {
+		this.numberOfInjection = numberOfInjection;
+	}
 
-    public String getNumberOfInjection() {
-        return numberOfInjection;
-    }
+	public String getPrevention() {
+		return prevention;
+	}
 
-    public void setNumberOfInjection(String numberOfInjection) {
-        this.numberOfInjection = numberOfInjection;
-    }
+	public void setPrevention(String prevention) {
+		this.prevention = prevention;
+	}
 
-    public String getPrevention() {
-        return prevention;
-    }
+	public Customer getCustomer() {
+		return customer;
+	}
 
-    public void setPrevention(String prevention) {
-        this.prevention = prevention;
-    }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-    public String getVaccineId() {
-        return vaccineId;
-    }
+	public Vaccine getVaccine() {
+		return vaccine;
+	}
 
-    public void setVaccineId(String vaccineId) {
-        this.vaccineId = vaccineId;
-    }
+	public void setVaccine(Vaccine vaccine) {
+		this.vaccine = vaccine;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	protected Result(Integer injectionResultId, @NotNull Date injectionDate, @NotNull String injectionPlace,
+			@NotNull Date nextInjectionDate, @NotNull String numberOfInjection, @NotNull String prevention,
+			Customer customer, Vaccine vaccine) {
+		super();
+		this.injectionResultId = injectionResultId;
+		this.injectionDate = injectionDate;
+		this.injectionPlace = injectionPlace;
+		this.nextInjectionDate = nextInjectionDate;
+		this.numberOfInjection = numberOfInjection;
+		this.prevention = prevention;
+		this.customer = customer;
+		this.vaccine = vaccine;
+	}
 
-        Result result = (Result) o;
+	protected Result() {
+		super();
+	}
+    
+    
 
-        if (injectionResultId != null ? !injectionResultId.equals(result.injectionResultId) : result.injectionResultId != null)
-            return false;
-        if (customerId != null ? !customerId.equals(result.customerId) : result.customerId != null) return false;
-        if (injectionDate != null ? !injectionDate.equals(result.injectionDate) : result.injectionDate != null)
-            return false;
-        if (injectionPlace != null ? !injectionPlace.equals(result.injectionPlace) : result.injectionPlace != null)
-            return false;
-        if (nextInjectionDate != null ? !nextInjectionDate.equals(result.nextInjectionDate) : result.nextInjectionDate != null)
-            return false;
-        if (numberOfInjection != null ? !numberOfInjection.equals(result.numberOfInjection) : result.numberOfInjection != null)
-            return false;
-        if (prevention != null ? !prevention.equals(result.prevention) : result.prevention != null) return false;
-        if (vaccineId != null ? !vaccineId.equals(result.vaccineId) : result.vaccineId != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = injectionResultId != null ? injectionResultId.hashCode() : 0;
-        result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
-        result = 31 * result + (injectionDate != null ? injectionDate.hashCode() : 0);
-        result = 31 * result + (injectionPlace != null ? injectionPlace.hashCode() : 0);
-        result = 31 * result + (nextInjectionDate != null ? nextInjectionDate.hashCode() : 0);
-        result = 31 * result + (numberOfInjection != null ? numberOfInjection.hashCode() : 0);
-        result = 31 * result + (prevention != null ? prevention.hashCode() : 0);
-        result = 31 * result + (vaccineId != null ? vaccineId.hashCode() : 0);
-        return result;
-    }
 }

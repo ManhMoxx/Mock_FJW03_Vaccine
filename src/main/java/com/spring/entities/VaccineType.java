@@ -1,65 +1,72 @@
 package com.spring.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "VaccineType")
 public class VaccineType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "VaccineTypeId")
-    private String vaccineTypeId;
-    @Basic
+    private Integer vaccineTypeId;
+    
+    @NotNull
     @Column(name = "Description")
     private String description;
-    @Basic
+    
+    @NotNull
     @Column(name = "VaccineTypeName")
     private String vaccineTypeName;
+    
+    @ManyToOne
+    @JoinColumn(name = "VaccineId")
+    private Vaccine vaccine;
 
-    public String getVaccineTypeId() {
-        return vaccineTypeId;
-    }
+	public Integer getVaccineTypeId() {
+		return vaccineTypeId;
+	}
 
-    public void setVaccineTypeId(String vaccineTypeId) {
-        this.vaccineTypeId = vaccineTypeId;
-    }
+	public void setVaccineTypeId(Integer vaccineTypeId) {
+		this.vaccineTypeId = vaccineTypeId;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getVaccineTypeName() {
-        return vaccineTypeName;
-    }
+	public String getVaccineTypeName() {
+		return vaccineTypeName;
+	}
 
-    public void setVaccineTypeName(String vaccineTypeName) {
-        this.vaccineTypeName = vaccineTypeName;
-    }
+	public void setVaccineTypeName(String vaccineTypeName) {
+		this.vaccineTypeName = vaccineTypeName;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public Vaccine getVaccine() {
+		return vaccine;
+	}
 
-        VaccineType that = (VaccineType) o;
+	public void setVaccine(Vaccine vaccine) {
+		this.vaccine = vaccine;
+	}
 
-        if (vaccineTypeId != null ? !vaccineTypeId.equals(that.vaccineTypeId) : that.vaccineTypeId != null)
-            return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (vaccineTypeName != null ? !vaccineTypeName.equals(that.vaccineTypeName) : that.vaccineTypeName != null)
-            return false;
+	protected VaccineType(Integer vaccineTypeId, @NotNull String description, @NotNull String vaccineTypeName,
+			Vaccine vaccine) {
+		super();
+		this.vaccineTypeId = vaccineTypeId;
+		this.description = description;
+		this.vaccineTypeName = vaccineTypeName;
+		this.vaccine = vaccine;
+	}
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = vaccineTypeId != null ? vaccineTypeId.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (vaccineTypeName != null ? vaccineTypeName.hashCode() : 0);
-        return result;
-    }
+	protected VaccineType() {
+		super();
+	}
+    
+    
 }
