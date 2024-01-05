@@ -8,8 +8,6 @@
 </head>
 <body>
 	<div class="menu">
-        <div class="row">
-            <div class="col-3">
 		        <div class="img-header-nhanvien">
                     <img id="backgroup-menu" src="<%=request.getContextPath()%>/logo/aside.png" alt="backgroup">
                     <div class="img-nhanvien-menu">
@@ -49,8 +47,6 @@
                         <strong>Report</strong><i class="fa fa-plus"></i>
                     </div>
                 </nav>
-            </div>
-        </div>
     </div>
 </body>
 </html>

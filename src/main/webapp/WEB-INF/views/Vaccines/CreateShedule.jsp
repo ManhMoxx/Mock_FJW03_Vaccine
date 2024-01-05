@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,25 +14,24 @@
 </head>
 <body>
 	 <div class="mt-4" style="padding: 15px;">
-        <form action="" method="POST">
+        <form  action="${pageContext.request.contextPath}/createschedule" method="post">
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="my-select">Vaccine<span style="color: red;">(*)</span>:</label>
                     <select id="my-select" class="form-control" name="vaccine">
-                        <option value="">~ Select Vaccine</option>
-                        <option value="Vaccine A">Vaccine A</option>
-                        <option value="Vaccine B">Vaccine B</option>
-                        <option value="Vaccine C">Vaccine C</option>
-                        <!-- Add other vaccine options -->
+                    	<option value="">~ Select Vaccine</option>
+                    	<c:forEach var="v" items="${listVaccine}">	                   
+	                        <option value="${v.vaccineId}">${v.vaccineName}</option>
+	                    </c:forEach>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="from">From<span style="color: red;">(*)</span>:</label>
-                    <input type="text" class="form-control" id="from" name="from">
+                    <input type="date" class="form-control" id="from" name="startDate">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="to">To<span style="color: red;">(*)</span>:</label>
-                    <input type="text" class="form-control" id="to" name="to">
+                    <input type="date" class="form-control" id="to" name="endDate" >
                 </div>
             </div>
 
@@ -42,8 +42,9 @@
                 </div>
                 <div class="col-md-8 mb-3">
                     <label for="note">Note:</label>
-                    <input type="text" class="form-control" id="note" name="note">
+                    <input type="text" class="form-control" id="note" name="description">
                 </div>
+                
             </div>
 
             <div class="row">
@@ -55,6 +56,5 @@
             </div>
         </form>
     </div>
-	
 </body>
 </html>

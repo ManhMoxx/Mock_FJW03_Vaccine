@@ -80,7 +80,7 @@ public class Schedule {
 	public void setVaccine(Vaccine vaccine) {
 		this.vaccine = vaccine;
 	}
-	protected Schedule(Integer injectionSchedule, @NotNull String description, @NotNull Date endDate,
+	public Schedule(Integer injectionSchedule, @NotNull String description, @NotNull Date endDate,
 			@NotNull String place, @NotNull Date startDate, Vaccine vaccine) {
 		super();
 		this.injectionSchedule = injectionSchedule;
@@ -90,7 +90,7 @@ public class Schedule {
 		this.startDate = startDate;
 		this.vaccine = vaccine;
 	}
-	protected Schedule() {
+	public Schedule() {
 		super();
 	}
     
