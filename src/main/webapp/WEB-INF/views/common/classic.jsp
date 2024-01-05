@@ -27,9 +27,11 @@
 	</header>
 	
 	
-	<div class="main">
+	<div class="row">
+	<div class="col-3">
 		  <tiles:insertAttribute name="menu" />
-		  <div class="content">
+		  </div>
+		  <div class="col-9">
 		    <tiles:insertAttribute name="body" />
 		  </div>
 	</div>
