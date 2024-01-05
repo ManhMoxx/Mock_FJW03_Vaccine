@@ -9,4 +9,5 @@ public interface ScheduleDAO {
 	Schedule update(Schedule schedule);
 	Schedule delete(Integer id);
 	List<Schedule> findAll(Integer pageNum, Integer pageSize);
+	Schedule findById(Integer injectionSchedule);
 }

@@ -20,8 +20,12 @@ public class VaccineDAOImpl implements VaccineDAO {
 
 	@Override
 	public Vaccine create(Vaccine vaccine) {
-		// TODO Auto-generated method stub
-		return null;
+		try(Session session = sessionFactory.openSession()) {
+			session.save(vaccine);
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+		return vaccine;
 	}
 
 	@Override

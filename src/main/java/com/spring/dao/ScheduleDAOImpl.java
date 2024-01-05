@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
@@ -30,11 +31,32 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 		}
 		return schedule;
 	}
-
+	@Transactional
 	@Override
 	public Schedule update(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return null;
+		try (Session session = sessionFactory.openSession()) {
+			// Xác định lịch trình cần cập nhật dựa trên ID
+			Schedule existingSchedule = session.get(Schedule.class, schedule.getInjectionSchedule());
+
+			// Kiểm tra xem lịch trình có tồn tại không
+			if (existingSchedule != null) {
+				// Cập nhật thông tin lịch trình
+				existingSchedule.setDescription(schedule.getDescription());
+				existingSchedule.setEndDate(schedule.getEndDate());
+				existingSchedule.setPlace(schedule.getPlace());
+				existingSchedule.setStartDate(schedule.getStartDate());
+				existingSchedule.setVaccine(schedule.getVaccine().getVaccineId());
+				
+				// Thực hiện cập nhật trong cơ sở dữ liệu
+				session.update(existingSchedule);
+			} else {
+				// Xử lý trường hợp lịch trình không tồn tại
+				throw new EntityNotFoundException("Lịch trình không tồn tại với ID: " + schedule.getInjectionSchedule());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return schedule;
 	}
 
 	@Override
@@ -58,6 +80,17 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Transactional
+	@Override
+	public Schedule findById(Integer injectionSchedule) {
+		try (Session session = sessionFactory.openSession()) {
+            // Sử dụng phương thức get để lấy đối tượng Schedule dựa trên ID
+            return session.get(Schedule.class, injectionSchedule);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
 	}
 
 }

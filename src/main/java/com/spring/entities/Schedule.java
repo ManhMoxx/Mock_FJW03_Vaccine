@@ -1,6 +1,6 @@
 package com.spring.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,18 +28,18 @@ public class Schedule {
     private String description;
     
     @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "EndDate")
-    private Date endDate;
+    private Date  endDate;
     
-    @NotNull
+    @NotBlank(message = "can not be empty")
     @Column(name = "Place")
     private String place;
     
     @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "StartDate")
-    private Date startDate;
+    private Date  startDate;
     
     @ManyToOne
     @JoinColumn(name = "VaccineId")
@@ -81,7 +82,7 @@ public class Schedule {
 		this.vaccine = vaccine;
 	}
 	public Schedule(Integer injectionSchedule, @NotNull String description, @NotNull Date endDate,
-			@NotNull String place, @NotNull Date startDate, Vaccine vaccine) {
+			@NotBlank String place, @NotNull Date startDate, Vaccine vaccine) {
 		super();
 		this.injectionSchedule = injectionSchedule;
 		this.description = description;
@@ -93,7 +94,8 @@ public class Schedule {
 	public Schedule() {
 		super();
 	}
-    
-    
-
+	public void setVaccine(Integer vaccineId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

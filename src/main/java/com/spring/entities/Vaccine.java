@@ -1,6 +1,7 @@
 package com.spring.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,7 +48,7 @@ public class Vaccine {
     @Column(name = "Usage")
     private String usage;
     
-    @NotNull
+    @NotBlank(message = "VaccineName can not empty")
     @Column(name = "VaccineName")
     private String vaccineName;
     
@@ -150,7 +151,7 @@ public class Vaccine {
 
 	protected Vaccine(Integer vaccineId, @NotNull String contraindication, @NotNull String indication,
 			@NotNull Integer numberOfInjection, @NotNull String origin, @NotNull Date timeBeginNextInjection,
-			@NotNull Date timeEndNextInjection, @NotNull String usage, @NotNull String vaccineName,
+			@NotNull Date timeEndNextInjection, @NotNull String usage, @NotBlank String vaccineName,
 			List<Schedule> schedules, List<VaccineType> vaccineTypes) {
 		super();
 		this.vaccineId = vaccineId;

@@ -46,6 +46,7 @@
                     <div class="link-vaccine-menu">
                         <strong>Report</strong><i class="fa fa-plus"></i>
                     </div>
+                    
                 </nav>
     </div>
 </body>

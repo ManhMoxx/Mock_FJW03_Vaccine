@@ -62,7 +62,7 @@
             </div>
         </div>
         <div>
-            <button type="button" id="btn-create">New Injection Schedule</button>
+            <button type="button" id="btn-create"><a href="${pageContext.request.contextPath}/createschedule">New Injection Schedule</a></button>
             <button class="btn-warning" type="button" id="btn-update">Update Injection Schedule</button>
         </div>
 </body>
