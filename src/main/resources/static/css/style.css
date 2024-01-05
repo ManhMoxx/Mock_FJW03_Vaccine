@@ -1,0 +1,62 @@
+@charset "ISO-8859-1";
+html,
+        .header{
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #009688;
+        }
+        .img-header{
+            height: 90px;
+            width: 90px;
+            padding: 20px;
+        }
+        .search-header{
+            color: white;
+            padding: 20px;
+        }
+        .img-header-nhanvien{
+            position: relative;
+        }
+        #backgroup-menu{
+            width: 100%;
+            height: 150px;
+            position: relative;
+        }
+        #img-nhanvien-menu{
+            width: 60px;
+            height: 60px;
+        }
+        .img-nhanvien-menu{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            color: black; 
+            width: 90%;          
+        }
+        .email-menu{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .link-menu{
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .home-menu{
+            padding: 15px;
+        }
+        .home-menu a{
+            text-decoration: none;
+        }
+        .link-vaccine-menu{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+        .row{
+            width: 100%;
+        }
