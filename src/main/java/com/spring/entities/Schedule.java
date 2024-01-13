@@ -23,7 +23,7 @@ public class Schedule {
     @Column(name = "InjectionSchedule")
     private Integer injectionSchedule;
     
-    @NotNull
+	@NotNull
     @Column(name = "Description")
     private String description;
     
@@ -94,8 +94,10 @@ public class Schedule {
 	public Schedule() {
 		super();
 	}
-	public void setVaccine(Integer vaccineId) {
-		// TODO Auto-generated method stub
-		
+    @Override
+	public String toString() {
+		return "Schedule [injectionSchedule=" + injectionSchedule + ", description=" + description + ", endDate="
+				+ endDate + ", place=" + place + ", startDate=" + startDate + ", vaccine=" + vaccine + "]";
 	}
+
 }

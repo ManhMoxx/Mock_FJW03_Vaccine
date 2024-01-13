@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.entities.Schedule;
+import com.spring.entities.Vaccine;
 
 @Repository
 public class ScheduleDAOImpl implements ScheduleDAO {
@@ -34,31 +35,51 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	@Transactional
 	@Override
 	public Schedule update(Schedule schedule) {
-		try (Session session = sessionFactory.openSession()) {
-			// Xác định lịch trình cần cập nhật dựa trên ID
-			Schedule existingSchedule = session.get(Schedule.class, schedule.getInjectionSchedule());
+	    try (Session session = sessionFactory.openSession()) {
+	    	
+	        // Xác định lịch trình cần cập nhật dựa trên ID
+	        Schedule existingSchedule = session.get(Schedule.class, schedule.getInjectionSchedule());
+	        System.out.println(existingSchedule);
 
-			// Kiểm tra xem lịch trình có tồn tại không
-			if (existingSchedule != null) {
-				// Cập nhật thông tin lịch trình
-				existingSchedule.setDescription(schedule.getDescription());
-				existingSchedule.setEndDate(schedule.getEndDate());
-				existingSchedule.setPlace(schedule.getPlace());
-				existingSchedule.setStartDate(schedule.getStartDate());
-				existingSchedule.setVaccine(schedule.getVaccine().getVaccineId());
-				
-				// Thực hiện cập nhật trong cơ sở dữ liệu
-				session.update(existingSchedule);
-			} else {
-				// Xử lý trường hợp lịch trình không tồn tại
-				throw new EntityNotFoundException("Lịch trình không tồn tại với ID: " + schedule.getInjectionSchedule());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return schedule;
+	        // Kiểm tra xem lịch trình có tồn tại không
+	        if (existingSchedule != null) {
+	            // Cập nhật thông tin lịch trình
+	            existingSchedule.setDescription(schedule.getDescription());
+	            existingSchedule.setEndDate(schedule.getEndDate());
+	            existingSchedule.setPlace(schedule.getPlace());
+	            existingSchedule.setStartDate(schedule.getStartDate());
+	            
+		        System.out.println(existingSchedule);
+
+	            Vaccine existingVaccine = session.get(Vaccine.class, schedule.getVaccine().getVaccineId());
+
+		        System.out.println(existingVaccine);
+	            
+	            if (existingVaccine == null) {
+	                // Nếu vaccine chưa tồn tại, hãy cập nhật thông tin của nó từ đối tượng schedule
+	                existingVaccine = schedule.getVaccine();
+	            } else {
+	                // Nếu vaccine đã tồn tại, hãy cập nhật thông tin từ đối tượng schedule
+	                existingVaccine.setVaccineName(schedule.getVaccine().getVaccineName());
+	                // Cập nhật các thuộc tính khác của Vaccine nếu có
+	            }
+
+	            // Cập nhật vaccine trong lịch trình
+	            existingSchedule.setVaccine(existingVaccine);
+	            
+	            System.out.println(existingSchedule);
+
+	            // Thực hiện cập nhật trong cơ sở dữ liệu
+	            session.update(existingSchedule);
+	        } else {
+	            // Xử lý trường hợp lịch trình không tồn tại
+	            throw new EntityNotFoundException("Lịch trình không tồn tại với ID: " + schedule.getInjectionSchedule());
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return schedule;
 	}
-
 	@Override
 	public Schedule delete(Integer id) {
 		// TODO Auto-generated method stub
@@ -88,6 +109,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
             // Sử dụng phương thức get để lấy đối tượng Schedule dựa trên ID
             return session.get(Schedule.class, injectionSchedule);
         } catch (Exception e) {
+        	
             e.printStackTrace();
         }
         return null;

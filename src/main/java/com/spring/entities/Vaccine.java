@@ -149,7 +149,7 @@ public class Vaccine {
 		this.vaccineTypes = vaccineTypes;
 	}
 
-	protected Vaccine(Integer vaccineId, @NotNull String contraindication, @NotNull String indication,
+	public Vaccine(Integer vaccineId, @NotNull String contraindication, @NotNull String indication,
 			@NotNull Integer numberOfInjection, @NotNull String origin, @NotNull Date timeBeginNextInjection,
 			@NotNull Date timeEndNextInjection, @NotNull String usage, @NotBlank String vaccineName,
 			List<Schedule> schedules, List<VaccineType> vaccineTypes) {
@@ -167,8 +167,17 @@ public class Vaccine {
 		this.vaccineTypes = vaccineTypes;
 	}
 
-	protected Vaccine() {
+	public Vaccine() {
 		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Vaccine [vaccineId=" + vaccineId + ", contraindication=" + contraindication + ", indication="
+				+ indication + ", numberOfInjection=" + numberOfInjection + ", origin=" + origin
+				+ ", timeBeginNextInjection=" + timeBeginNextInjection + ", timeEndNextInjection="
+				+ timeEndNextInjection + ", usage=" + usage + ", vaccineName=" + vaccineName + ", results=" + results
+				+ ", schedules=" +  ", vaccineTypes=" + vaccineTypes + "]";
 	}
     
     

@@ -32,8 +32,7 @@
 			<div class="row">
 				<div class="col-md-4 mb-3">
 					<label for="my-select">Vaccine<span style="color: red;">(*)</span>:
-					</label> <select id="my-select" class="form-control"
-						path="vaccine.vaccineId" required>
+					</label> <select id="my-select" class="form-control" name="vaccine.vaccineId" required>
 						<option value="">~ Select Vaccine</option>
 						<c:forEach var="v" items="${listVaccine}">
 							<option value="${v.vaccineId}">${v.vaccineName}</option>

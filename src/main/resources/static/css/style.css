@@ -52,11 +52,13 @@ html,
             text-decoration: none;
         }
         .link-vaccine-menu{
-            display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
+            padding: 10px;
         }
+        a.btn{
+			padding: 0;
+		}
         
         /* body css of ScheduleList */
          /* Style the input to have only an underline */
@@ -133,3 +135,5 @@ html,
 			text-decoration: none;
 			color: white;
 		}
+
+		

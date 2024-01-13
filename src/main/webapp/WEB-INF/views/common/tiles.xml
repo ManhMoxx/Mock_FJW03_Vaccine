@@ -28,9 +28,9 @@
 			value="/WEB-INF/views/Vaccines/CreateShedule.jsp" />
 	</definition>
 	<definition name="updateSchedulePage" extends="base.definition">
-		<put-attribute name="title" value="Create Schedule" />
+		<put-attribute name="title" value="Update Schedule" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/Vaccines/CreateShedule.jsp" />
+			value="/WEB-INF/views/Vaccines/UpdateSchedule.jsp" />
 	</definition>
 	
 </tiles-definitions>
